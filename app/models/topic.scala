@@ -7,7 +7,7 @@ case class Topic(id: Long, name: String)
 
 object Topic extends SQLSyntaxSupport[Topic]{
   override val tableName = "topic"
-  override columnNames = Seq("id", "name")
+  override val columnNames = Seq("id", "name")
 
   def create(name: String)(implicit session: DBSession):
     Topic = {
@@ -22,7 +22,7 @@ object Topic extends SQLSyntaxSupport[Topic]{
   def find(name: String)(implicit session: DBSession):
     Option[Topic] = {
       val t = Topic.syntax("t")
-      withSQL { select.from(Topic as m).where.eq(t.name, name) }
+      withSQL { select.from(Topic as t).where.eq(t.name, name) }
         .map { rs => Topic(
           id = rs.long(t.resultName.id),
           name = rs.string(t.resultName.name)
