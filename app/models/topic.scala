@@ -2,7 +2,7 @@ package models
 
 import scalikejdbc._
 
-case class Topic(id: Int, name: String)
+case class Topic(id: Long, name: String)
 
 object Topic extends SQLSyntaxSupport[Topic]{
 
@@ -20,7 +20,7 @@ object Topic extends SQLSyntaxSupport[Topic]{
     Topic(id = id, name = name)
   }
 
-  def find(id: Int)(implicit session: DBSession = autoSession):
+  def find(id: Long)(implicit session: DBSession = autoSession):
     Option[Topic] = {
       withSQL { select.from(Topic as t).where.eq(t.id, id) }
         .map { rs => Topic(

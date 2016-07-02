@@ -24,7 +24,7 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
     Ok(views.html.index(res, webJarAssets, Topic.findAll))
   }
 
-  def show(id: Int) = Action{
+  def show(id: Long) = Action{
     val res = "トピック"
     Topic.find(id) match {
       case Some(topic) => Ok(views.html.showTopic(res, webJarAssets, topic))
