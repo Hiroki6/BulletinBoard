@@ -1,8 +1,9 @@
 # --- !Ups
+
 create table topic(
-  id int(10) not null auto_increment,
+  id int(10) NOT NULL AUTO_INCREMENT,
   name varchar(100),
-  primary key(id)
+  PRIMARY KEY (id)
 );
 
 # --- !Downs

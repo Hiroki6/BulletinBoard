@@ -19,4 +19,7 @@ GET     /webjars/*file              controllers.WebJarAssets.at(file)
 # GET     /topic/all               controllers.TopicController.all()
 
 # create topic
-#GET     /topic/create            controllers.TopicController.create()
+GET     /topic/create            controllers.TopicController.createFormView
+POST    /topic/create            controllers.TopicController.create
+
+#POST    /send                    controllers.TopicController.send

@@ -4,6 +4,7 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 import play.api.i18n.{I18nSupport, MessagesApi, Messages, Lang}
+import models.Topic
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
