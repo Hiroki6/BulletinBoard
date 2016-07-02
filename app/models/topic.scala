@@ -20,9 +20,9 @@ object Topic extends SQLSyntaxSupport[Topic]{
     Topic(id = id, name = name)
   }
 
-  def find(name: String)(implicit session: DBSession = autoSession):
+  def find(id: Long)(implicit session: DBSession = autoSession):
     Option[Topic] = {
-      withSQL { select.from(Topic as t).where.eq(t.name, name) }
+      withSQL { select.from(Topic as t).where.eq(t.id, id) }
         .map { rs => Topic(
           id = rs.long(t.resultName.id),
           name = rs.string(t.resultName.name)
