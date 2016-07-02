@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                           controllers.TopicController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -15,11 +15,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # setting of bootstrap
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
 
-# show all topic
-# GET     /topic/all               controllers.TopicController.all()
-
 # create topic
 GET     /topic/create            controllers.TopicController.createFormView
 POST    /topic/create            controllers.TopicController.create
-
-#POST    /send                    controllers.TopicController.send
