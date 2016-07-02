@@ -16,5 +16,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
 
 # create topic
-GET     /topic/create            controllers.TopicController.createFormView
-POST    /topic/create            controllers.TopicController.create
+GET     /topic/create               controllers.TopicController.createFormView
+POST    /topic/create               controllers.TopicController.create
+GET     /topic/:id                  controllers.TopicController.show(id: Long)

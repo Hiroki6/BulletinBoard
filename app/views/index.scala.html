@@ -1,23 +1,10 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
 @(message: String, webJarAssets: WebJarAssets, topics: List[Topic])
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
 @main("Welcome to Play", webJarAssets) {
 
-  <div class = "row">
-   <div class = "container">
      <h2>トピック一覧</h2>
      @for(topic <- topics) {
-       <p>@{topic.name}</p>
+       <a href='@{routes.TopicController.show(topic.id)}'><p>@{topic.name}</p></a>
      }
      <a href = "topic/create">トピックの作成</a>
-   </div>
-  </div>
 }
