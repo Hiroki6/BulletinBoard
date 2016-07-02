@@ -19,6 +19,11 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
     )(CreateForm.apply)(CreateForm.unapply)
   )
 
+  def index = Action{
+    val res = "トピック一覧"
+    Ok(views.html.index(res, webJarAssets, Topic.findAll))
+  }
+
   def createFormView = Action {
     val res = "トピックの作成"
     Ok(views.html.create(res, createForm, webJarAssets))
@@ -32,7 +37,7 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
       {
         case CreateForm(n) => {
           Topic.create(n)
-          Redirect(routes.HomeController.index)
+          Redirect(routes.TopicController.index)
         }
       }
     )
