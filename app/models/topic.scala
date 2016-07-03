@@ -10,6 +10,9 @@ object Topic extends SQLSyntaxSupport[Topic]{
   override val columns = Seq("id", "name")
 
   val t = Topic.syntax("t")
+
+  def apply(t: ResultName[Topic])(rs: WrappedResultSet): Topic = Topic(rs.long(t.id), rs.string(t.name))
+
   def create(name: String)(implicit session: DBSession = autoSession):
     Topic = {
       val id = withSQL {
@@ -21,23 +24,15 @@ object Topic extends SQLSyntaxSupport[Topic]{
     }
 
   def find(id: Long)(implicit session: DBSession = autoSession):
-  Option[Topic] = {
-    withSQL { select.from(Topic as t).where.eq(t.id, id) }
-      .map { rs => Topic(
-        id = rs.long(t.resultName.id),
-        name = rs.string(t.resultName.name)
-      )
-      }.single.apply()
+    Option[Topic] = {
+      withSQL { select.from(Topic as t).where.eq(t.id, id) }
+        .map(Topic(t.resultName)).single.apply()
   }
 
   def findAll()(implicit session: DBSession = autoSession):
     List[Topic] = {
       withSQL { select.from(Topic as t) }
-        .map { rs => Topic(
-          id = rs.long(t.resultName.id),
-          name = rs.string(t.resultName.name)
-          )
-        }.list.apply()
+        .map(Topic(t.resultName)).list.apply()
     }
 }
 

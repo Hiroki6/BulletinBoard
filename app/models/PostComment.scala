@@ -11,6 +11,9 @@ object PostComment extends SQLSyntaxSupport[PostComment]{
 
   val c = PostComment.syntax("c")
 
+  def apply(c: ResultName[PostComment])(rs: WrappedResultSet): PostComment =
+    PostComment(rs.long(c.id), rs.string(c.content), rs.long(c.post_id))
+
   def create(content: String, post_id: Long)(implicit session: DBSession = autoSession):
   PostComment = {
     val id = withSQL {
@@ -25,12 +28,7 @@ object PostComment extends SQLSyntaxSupport[PostComment]{
   def findByPostId(post_id: Long)(implicit session: DBSession = autoSession):
   List[PostComment] = {
     withSQL { select.from(PostComment as c).where.eq(c.post_id, post_id) }
-      .map { rs => PostComment(
-        id = rs.long(c.resultName.id),
-        content = rs.string(c.resultName.content),
-        post_id = rs.long(c.resultName.post_id)
-      )
-      }.list.apply()
+      .map(PostComment(c.resultName)).list.apply()
   }
 }
 
