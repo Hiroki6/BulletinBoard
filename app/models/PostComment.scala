@@ -11,7 +11,6 @@ object PostComment extends SQLSyntaxSupport[PostComment]{
 
   val c = PostComment.syntax("c")
 
-  def apply(p: ResultName[PostComment])(rs: WrappedResultSet) = new PostComment(rs.long(p.id), rs.string(p.content), rs.long(p.post_id))
   def create(content: String, post_id: Long)(implicit session: DBSession = autoSession):
   PostComment = {
     val id = withSQL {

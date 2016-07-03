@@ -11,10 +11,6 @@ object TopicPost extends SQLSyntaxSupport[TopicPost]{
 
   val p = TopicPost.syntax("p")
 
-  def apply(p: ResultName[TopicPost])(rs: WrappedResultSet) = new TopicPost(rs.long(p.id), rs.string(p.content), rs.long(p.topic_id))
-  /*def apply(p: ResultName[TopicPost], t: ResultName[Topic])(rs: WrappedResultSet) = {
-    apply(p)(rs).copy(topic = rs.longOpt(t.id).map(_ => Topic(t)(rs)))
-  }*/
   def create(content: String, topic_id: Long)(implicit session: DBSession = autoSession):
     TopicPost = {
       val id = withSQL {

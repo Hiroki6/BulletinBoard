@@ -9,8 +9,6 @@ object Topic extends SQLSyntaxSupport[Topic]{
   override val tableName = "topic"
   override val columns = Seq("id", "name")
 
-  def apply(t: ResultName[Topic])(rs: WrappedResultSet) = new Topic(rs.long(t.id), rs.string(t.name))
-
   val t = Topic.syntax("t")
   def create(name: String)(implicit session: DBSession = autoSession):
     Topic = {
