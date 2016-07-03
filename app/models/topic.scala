@@ -9,8 +9,6 @@ object Topic extends SQLSyntaxSupport[Topic]{
   override val tableName = "topic"
   override val columns = Seq("id", "name")
 
-  def apply(t: ResultName[Topic])(rs: WrappedResultSet) = new Topic(rs.long(t.id), rs.string(t.name))
-
   val t = Topic.syntax("t")
   def create(name: String)(implicit session: DBSession = autoSession):
     Topic = {
@@ -21,14 +19,6 @@ object Topic extends SQLSyntaxSupport[Topic]{
       }.updateAndReturnGeneratedKey.apply()
       Topic(id = id, name = name)
     }
-
-  /*def find(id: Long)(implicit session: DBSession = autoSession):
-    List[Topic] = {
-      withSQL { select.from(Topic as t).leftJoin(TopicPost as p).on(t.id, p.topic_id).where.eq(t.id, id).orderBy(p.id) }
-          .one(Topic(t, p))
-          .toMany(TopicPost.opt(p))
-          .map { (topic, posts) =>  topic.copy(posts => posts) }
-        }.list.apply()*/
 
   def find(id: Long)(implicit session: DBSession = autoSession):
   Option[Topic] = {

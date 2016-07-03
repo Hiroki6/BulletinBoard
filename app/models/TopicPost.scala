@@ -11,10 +11,6 @@ object TopicPost extends SQLSyntaxSupport[TopicPost]{
 
   val p = TopicPost.syntax("p")
 
-  def apply(p: ResultName[TopicPost])(rs: WrappedResultSet) = new TopicPost(rs.long(p.id), rs.string(p.content), rs.long(p.topic_id))
-  /*def apply(p: ResultName[TopicPost], t: ResultName[Topic])(rs: WrappedResultSet) = {
-    apply(p)(rs).copy(topic = rs.longOpt(t.id).map(_ => Topic(t)(rs)))
-  }*/
   def create(content: String, topic_id: Long)(implicit session: DBSession = autoSession):
     TopicPost = {
       val id = withSQL {
@@ -25,6 +21,17 @@ object TopicPost extends SQLSyntaxSupport[TopicPost]{
       }.updateAndReturnGeneratedKey.apply()
       TopicPost(id = id, content = content, topic_id = topic_id)
     }
+
+  def find(id: Long)(implicit session: DBSession = autoSession):
+  Option[TopicPost] = {
+    withSQL { select.from(TopicPost as p).where.eq(p.id, id) }
+      .map { rs => TopicPost(
+        id = rs.long(p.resultName.id),
+        content = rs.string(p.resultName.content),
+        topic_id = rs.long(p.resultName.topic_id)
+      )
+      }.single.apply()
+  }
 
   def findByTopicId(topic_id: Long)(implicit session: DBSession = autoSession):
     List[TopicPost] = {

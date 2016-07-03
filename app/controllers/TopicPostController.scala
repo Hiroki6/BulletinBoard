@@ -19,14 +19,6 @@ class TopicPostController @Inject() (implicit webJarAssets: WebJarAssets, val me
     )(PostForm.apply)(PostForm.unapply)
   )
 
-  /*def show(id: Long) = Action {
-    val res = "トピック"
-    Topic.find(id) match {
-      case Some(topic) => Ok(views.html.topic(res, postForm, webJarAssets, topic))
-      case None => NotFound("Not Found")
-    }
-  }*/
-
   def show(id: Long) = Action {
     val res = "トピック"
     Topic.find(id) match {
