@@ -26,6 +26,17 @@ object TopicPost extends SQLSyntaxSupport[TopicPost]{
       TopicPost(id = id, content = content, topic_id = topic_id)
     }
 
+  def find(id: Long)(implicit session: DBSession = autoSession):
+  Option[TopicPost] = {
+    withSQL { select.from(TopicPost as p).where.eq(p.id, id) }
+      .map { rs => TopicPost(
+        id = rs.long(p.resultName.id),
+        content = rs.string(p.resultName.content),
+        topic_id = rs.long(p.resultName.topic_id)
+      )
+      }.single.apply()
+  }
+
   def findByTopicId(topic_id: Long)(implicit session: DBSession = autoSession):
     List[TopicPost] = {
       withSQL { select.from(TopicPost as p).where.eq(p.topic_id, topic_id) }

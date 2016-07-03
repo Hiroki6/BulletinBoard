@@ -22,14 +22,6 @@ object Topic extends SQLSyntaxSupport[Topic]{
       Topic(id = id, name = name)
     }
 
-  /*def find(id: Long)(implicit session: DBSession = autoSession):
-    List[Topic] = {
-      withSQL { select.from(Topic as t).leftJoin(TopicPost as p).on(t.id, p.topic_id).where.eq(t.id, id).orderBy(p.id) }
-          .one(Topic(t, p))
-          .toMany(TopicPost.opt(p))
-          .map { (topic, posts) =>  topic.copy(posts => posts) }
-        }.list.apply()*/
-
   def find(id: Long)(implicit session: DBSession = autoSession):
   Option[Topic] = {
     withSQL { select.from(Topic as t).where.eq(t.id, id) }

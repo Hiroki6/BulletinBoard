@@ -1,0 +1,18 @@
+@(message: String, commentForm: Form[CommentForm], webJarAssets: WebJarAssets, post: TopicPost, comments: List[PostComment])(implicit messages: Messages)
+
+@import helper._
+@main("Welcome to Play", webJarAssets) {
+
+  <h2>投稿: @post.content</h2>
+  <h3>コメント一覧</h3>
+  @for(comment <- comments) {
+  <p>@{comment.content}</p>
+  }
+  <div class = "post-form">
+    @form(action = routes.PostCommentController.create(post.id)){
+    @textarea(commentForm("新規コメント"))
+    <input type = "submit" value="コメントする">
+    }
+  </div>
+
+}
