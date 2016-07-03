@@ -5,8 +5,8 @@
 
    <h2>トピック一覧</h2>
    @for(topic <- topics) {
-     <a href='@{routes.TopicPostController.show(topic.id)}'><p>@{topic.name}</p></a>
+     <h3><a href='@{routes.TopicPostController.show(topic.id)}'>@{topic.name}</a></h3>
    }
-   <a href="topic/create">トピックの作成</a>
+   <a href="topic/create">トピックを作成する</a>
 
 }
