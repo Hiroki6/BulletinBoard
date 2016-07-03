@@ -9,14 +9,13 @@ import play.api.data.Forms._
 import play.api.i18n.{I18nSupport, MessagesApi}
 import models._
 
-case class PostForm(content: String)
 @Singleton
 class TopicPostController @Inject() (implicit webJarAssets: WebJarAssets, val messagesApi: MessagesApi) extends Controller with I18nSupport{
 
   val postForm = Form(
     mapping(
       "新規投稿" -> text
-    )(PostForm.apply)(PostForm.unapply)
+    )(CreateForm.apply)(CreateForm.unapply)
   )
 
   def show(id: Long) = Action {

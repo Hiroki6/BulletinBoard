@@ -9,14 +9,13 @@ import play.api.data.Forms._
 import play.api.i18n.{I18nSupport, MessagesApi}
 import models._
 
-case class CommentForm(content: String)
 @Singleton
 class PostCommentController @Inject() (implicit webJarAssets: WebJarAssets, val messagesApi: MessagesApi) extends Controller with I18nSupport{
 
   val commentForm = Form(
     mapping(
       "新規コメント" -> text
-    )(CommentForm.apply)(CommentForm.unapply)
+    )(CreateForm.apply)(CreateForm.unapply)
   )
 
   def show(id: Long) = Action {
