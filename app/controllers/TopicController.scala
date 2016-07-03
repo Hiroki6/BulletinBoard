@@ -19,22 +19,10 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
     )(TopicForm.apply)(TopicForm.unapply)
   )
 
-  /*def index = Action {
-    val res = "トピック一覧"
-    Ok(views.html.index(res, webJarAssets, Topic.findAll))
-  }*/
-
   def createTopic = Action {
     val res = "トピックの作成"
     Ok(views.html.createTopic(res, topicForm, webJarAssets))
   }
-  /*def show(id: Long) = Action {
-    val res = "トピック"
-    Topic.find(id) match {
-      case Some(topic) => Ok(views.html.topic(res, postForm, webJarAssets, topic))
-      case None => NotFound("Not Found")
-    }
-  }*/
 
   def create = Action { implicit request =>
     topicForm.bindFromRequest.fold(
