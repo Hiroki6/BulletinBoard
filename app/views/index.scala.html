@@ -1,10 +1,12 @@
-@(message: String, webJarAssets: WebJarAssets, topics: List[Topic])
+@(message: String, topics: List[Topic], webJarAssets: WebJarAssets)
 
+@import helper._
 @main("Welcome to Play", webJarAssets) {
 
-     <h2>トピック一覧</h2>
-     @for(topic <- topics) {
-       <a href='@{routes.TopicController.show(topic.id)}'><p>@{topic.name}</p></a>
-     }
-     <a href = "topic/create">トピックの作成</a>
+   <h2>トピック一覧</h2>
+   @for(topic <- topics) {
+     <a href='@{routes.TopicPostController.show(topic.id)}'><p>@{topic.name}</p></a>
+   }
+   <a href="topic/create">トピックの作成</a>
+
 }

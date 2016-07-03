@@ -1,0 +1,14 @@
+@(message: String, postForm: Form[PostForm], webJarAssets: WebJarAssets, topic: Topic)(implicit messages: Messages)
+
+@import helper._
+@main("Welcome to Play", webJarAssets) {
+
+  <h2>トピック: @topic.name</h2>
+  <h3>投稿一覧</h3>
+  <div class = "post-form">
+    @form(action = routes.TopicPostController.create(topic.id)){
+    @textarea(postForm("content"))
+    <input type = "submit" value="投稿する">
+    }
+  </div>
+}

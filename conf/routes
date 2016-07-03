@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.TopicController.index
+GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -16,6 +16,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
 
 # create topic
-GET     /topic/create               controllers.TopicController.createFormView
+GET     /topic/create               controllers.TopicController.createTopic
 POST    /topic/create               controllers.TopicController.create
-GET     /topic/:id                  controllers.TopicController.show(id: Long)
+GET     /topic/:id                  controllers.TopicPostController.show(id: Long)
+
+POST    /topic/:id                  controllers.TopicPostController.create(id: Long)
