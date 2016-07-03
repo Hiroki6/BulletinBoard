@@ -1,11 +1,11 @@
 # --- !Ups
 
-create table post(
+create table topic_post(
   id int(10) NOT NULL AUTO_INCREMENT,
-  content text NOT NULL,
+  content varchar(255) NOT NULL,
   topic_id int(10) NOT NULL,
   PRIMARY KEY (id)
 );
 
 # --- !Downs
-drop table post;
+drop table topic_post;
