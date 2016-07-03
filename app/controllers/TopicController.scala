@@ -9,14 +9,14 @@ import play.api.data.Forms._
 import play.api.i18n.{I18nSupport, MessagesApi}
 import models._
 
-case class TopicForm(name: String)
+case class CreateForm(content: String)
 @Singleton
 class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messagesApi: MessagesApi) extends Controller with I18nSupport{
 
   val topicForm = Form(
     mapping(
-      "name" -> text
-    )(TopicForm.apply)(TopicForm.unapply)
+      "新規トピック" -> text
+    )(CreateForm.apply)(CreateForm.unapply)
   )
 
   def createTopic = Action {
@@ -28,7 +28,7 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
     topicForm.bindFromRequest.fold(
       error => BadRequest(topicForm.bindFromRequest.error("name").get.message),
       form => {
-        val topic = Topic.create(name = form.name)
+        val topic = Topic.create(name = form.content)
         Redirect(routes.TopicPostController.show(topic.id))
       }
     )
