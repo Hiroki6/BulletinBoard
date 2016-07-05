@@ -13,6 +13,7 @@ GET     /webjars/*file              controllers.WebJarAssets.at(file)
 # create topic
 GET     /topic/create               controllers.TopicController.createTopic
 POST    /topic/create               controllers.TopicController.create
+POST  /topic/:id/delete             controllers.TopicController.delete(id: Long)
 
 GET     /topic/:id                  controllers.TopicPostController.show(id: Long)
 POST    /topic/:id                  controllers.TopicPostController.create(id: Long)

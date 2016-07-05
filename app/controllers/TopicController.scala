@@ -34,4 +34,16 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
     )
   }
 
+  def delete(id: Long) = Action {
+    PostComment.countByTopicId(id) match {
+      case 0 => {
+        TopicPost.deleteByTopicId(id)
+        Topic.delete(id)
+        Redirect(routes.HomeController.index)
+      }
+      case _ => BadRequest("このトピックにコメントがあるため削除できません")
+    }
+
+  }
+
 }

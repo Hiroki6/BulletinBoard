@@ -10,8 +10,8 @@
   }
   <div class = "post-form">
     @form(action = routes.PostCommentController.create(post.id)){
-    @textarea(commentForm("新規コメント"))
-    <input type = "submit" value="コメントする">
+      @textarea(commentForm("新規コメント"))
+      <input type = "submit" value="コメントする">
     }
   </div>
 

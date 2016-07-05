@@ -30,7 +30,7 @@ class TopicPostController @Inject() (implicit webJarAssets: WebJarAssets, val me
    postForm.bindFromRequest.fold(
       error => BadRequest(postForm.bindFromRequest.error("新規投稿").get.message),
       form => {
-        TopicPost.create(content = form.content, topic_id = id)
+        TopicPost.create(content = form.content, topicId = id)
         Redirect(routes.TopicPostController.show(id))
       }
     )

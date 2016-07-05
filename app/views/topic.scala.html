@@ -11,8 +11,11 @@
   }
   <div class = "post-form">
     @form(action = routes.TopicPostController.create(topic.id)){
-    @textarea(postForm("新規投稿"))
-    <input type = "submit" value="投稿する">
+      @textarea(postForm("新規投稿"))
+      <input type = "submit" value="投稿する">
     }
   </div>
+  @form(action=routes.TopicController.delete(topic.id)){
+    <input type = "submit" value="トピックを削除する">
+  }
 }
