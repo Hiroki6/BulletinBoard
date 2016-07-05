@@ -15,7 +15,7 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
 
   val topicForm = Form(
     mapping(
-      "新規トピック" -> text
+      "新規トピック" -> nonEmptyText
     )(CreateForm.apply)(CreateForm.unapply)
   )
 
@@ -26,7 +26,7 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
 
   def create = Action { implicit request =>
     topicForm.bindFromRequest.fold(
-      error => BadRequest(topicForm.bindFromRequest.error("name").get.message),
+      error => BadRequest(topicForm.bindFromRequest.error("新規トピック").get.message),
       form => {
         val topic = Topic.create(name = form.content)
         Redirect(routes.TopicPostController.show(topic.id))

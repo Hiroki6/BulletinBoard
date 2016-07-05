@@ -14,7 +14,7 @@ class PostCommentController @Inject() (implicit webJarAssets: WebJarAssets, val 
 
   val commentForm = Form(
     mapping(
-      "新規コメント" -> text
+      "新規コメント" -> nonEmptyText
     )(CreateForm.apply)(CreateForm.unapply)
   )
 

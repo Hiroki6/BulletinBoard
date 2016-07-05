@@ -14,7 +14,7 @@ class TopicPostController @Inject() (implicit webJarAssets: WebJarAssets, val me
 
   val postForm = Form(
     mapping(
-      "新規投稿" -> text
+      "新規投稿" -> nonEmptyText
     )(CreateForm.apply)(CreateForm.unapply)
   )
 

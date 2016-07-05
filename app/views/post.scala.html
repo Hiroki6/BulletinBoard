@@ -11,7 +11,7 @@
   <div class = "post-form">
     @form(action = routes.PostCommentController.create(post.id)){
       @textarea(commentForm("新規コメント"))
-      <input type = "submit" value="コメントする">
+      <button class = "btn-primary">コメントする</button>
     }
   </div>
 
