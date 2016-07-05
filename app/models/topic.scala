@@ -27,12 +27,19 @@ object Topic extends SQLSyntaxSupport[Topic]{
     Option[Topic] = {
       withSQL { select.from(Topic as t).where.eq(t.id, id) }
         .map(Topic(t.resultName)).single.apply()
-  }
+    }
 
   def findAll()(implicit session: DBSession = autoSession):
     List[Topic] = {
       withSQL { select.from(Topic as t) }
         .map(Topic(t.resultName)).list.apply()
     }
+
+  def delete(id: Long)(implicit session: DBSession = autoSession) {
+    withSQL {
+      deleteFrom(Topic).where.eq(Topic.column.id, id)
+    }.update.apply()
+  }
+
 }
 

@@ -34,4 +34,10 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
     )
   }
 
+  def delete(id: Long) = Action {
+    TopicPost.deleteByTopicId(id)
+    Topic.delete(id)
+    Redirect(routes.HomeController.index)
+  }
+
 }
