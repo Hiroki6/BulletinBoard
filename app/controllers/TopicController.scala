@@ -6,17 +6,17 @@ import play.api._
 import play.api.mvc._
 import play.api.data.Form
 import play.api.data.Forms._
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{ I18nSupport, MessagesApi }
 import models._
 
-case class CreateForm(content: String)
+case class TopicForm(name: String)
 @Singleton
-class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messagesApi: MessagesApi) extends Controller with I18nSupport{
+class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   val topicForm = Form(
     mapping(
-      "新規トピック" -> nonEmptyText
-    )(CreateForm.apply)(CreateForm.unapply)
+      "new topic" -> nonEmptyText
+    )(TopicForm.apply)(TopicForm.unapply)
   )
 
   def createTopic = Action {
@@ -26,9 +26,9 @@ class TopicController @Inject() (implicit webJarAssets: WebJarAssets, val messag
 
   def create = Action { implicit request =>
     topicForm.bindFromRequest.fold(
-      error => BadRequest(topicForm.bindFromRequest.error("新規トピック").get.message),
+      error => BadRequest(topicForm.bindFromRequest.error("new topic").get.message),
       form => {
-        val topic = Topic.create(name = form.content)
+        val topic = Topic.create(name = form.name)
         Redirect(routes.TopicPostController.show(topic.id))
       }
     )

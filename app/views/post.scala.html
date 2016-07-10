@@ -1,4 +1,4 @@
-@(message: String, commentForm: Form[CreateForm], webJarAssets: WebJarAssets, post: TopicPost, comments: List[PostComment])(implicit messages: Messages)
+@(message: String, commentForm: Form[CommentForm], webJarAssets: WebJarAssets, post: TopicPost, comments: List[PostComment])(implicit messages: Messages)
 
 @import helper._
 @main("Welcome to Play", webJarAssets) {
@@ -10,7 +10,7 @@
   }
   <div class = "post-form">
     @form(action = routes.PostCommentController.create(post.id)){
-      @textarea(commentForm("新規コメント"))
+      @textarea(commentForm("new comment"))
       <button class = "btn-primary">コメントする</button>
     }
   </div>

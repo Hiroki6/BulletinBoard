@@ -1,11 +1,11 @@
-@(message: String, topicForm: Form[CreateForm], webJarAssets: WebJarAssets)(implicit messages: Messages)
+@(message: String, topicForm: Form[TopicForm], webJarAssets: WebJarAssets)(implicit messages: Messages)
 
 @import helper._
 @main("Welcome to Play", webJarAssets) {
 
   <h2>トピックの作成</h2>
   @form(action = routes.TopicController.create){
-    @inputText(topicForm("新規トピック"))
+    @inputText(topicForm("new topic"))
     <input type = "submit" value="作成">
   }
 }
