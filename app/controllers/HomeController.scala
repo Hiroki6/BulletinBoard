@@ -7,9 +7,9 @@ import play.api.mvc._
 import models._
 
 @Singleton
-class HomeController @Inject() (implicit webJarAssets: WebJarAssets) extends Controller{
+class HomeController @Inject() (implicit webJarAssets: WebJarAssets) extends Controller {
 
-  def index = Action{
+  def index = Action {
     val res = "トピック一覧"
     Ok(views.html.index(res, Topic.findAll, webJarAssets))
   }
